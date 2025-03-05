@@ -1,0 +1,4 @@
+[submodule "integer-mate"]
+	path = integer-mate
+	url = https://github.com/MagmaFinanceIO/integer-mate.git
+	branch = v1.41.1
