@@ -20,7 +20,7 @@ IntegerMate = { local = "../integer-mate/sui", override = true }
 # Override = { local = "../conflicting/version", override = true }
 
 [addresses]
-magma_math = "0x0"
+magma_math = "0x7675334bcfd81e7a3268ff0b9c8611b20c68b259c46ce840f6237d3018368cb6"
 
 # Named addresses will be accessible in Move as `@name`. They're also exported:
 # for example, `std = "0x1"` is exported by the Standard Library.

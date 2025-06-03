@@ -7,7 +7,7 @@ public fun sqrt(x: u256): u256 {
         return 0
     };
 
-    let msb = most_significant_bit(x);
+    let (msb, _) = most_significant_bit(x);
     let mut sqrt_x = 1 << (msb >> 1);
     sqrt_x = (sqrt_x + x / sqrt_x) >> 1;
     sqrt_x = (sqrt_x + x / sqrt_x) >> 1;
