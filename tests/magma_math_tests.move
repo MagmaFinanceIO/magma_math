@@ -84,10 +84,10 @@ module magma_math::math_tests {
 
     #[test]
     fun test_pow_of_0x800000() {
-        let bases = vector[0, 1, 2];
+        let bases = vector[to_u128x128(111111111, 8)];
         let mut i = 0;
         while (i < bases.length()) {
-            std::debug::print(&(pow(to_u128x128(bases[i], 0), i32::from(64))));
+            std::debug::print(&(pow(bases[i], i32::from(640))));
             i = i + 1;
         };
     }

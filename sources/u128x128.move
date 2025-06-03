@@ -15,6 +15,7 @@ module magma_math::u128x128 {
     const ErrLogUnderflow: vector<u8> = b"log underflow";
     #[error]
     const ErrPowUnderflow: vector<u8> = b"pow underflow";
+    const ErrPowOverflow: u64 = 3;
 
     public fun to_u128x128(x: u128, decimals: u8): u256 {
         (x as u256 << 128) / u256::pow(10, decimals)
@@ -110,6 +111,7 @@ module magma_math::u128x128 {
             return 1 << FIX_POINT_BITS
         };
         let abs_y = y.abs_u32() as u128;
+        assert!(abs_y < 0x100000, ErrPowOverflow);
         if (y.is_neg()) {
             invert = !invert;
         };
@@ -131,45 +133,6 @@ module magma_math::u128x128 {
                 squared = (squared * squared) >> FIX_POINT_BITS;
                 cursor = cursor << 1;
             };
-            // if (abs_y & 0x1 != 0) { result = (result * squared) >> FIX_POINT_BITS; };
-            // squared = (squared * squared) >> FIX_POINT_BITS;
-            // if (abs_y & 0x2 != 0) { result = (result * squared) >> FIX_POINT_BITS; };
-            // squared = (squared * squared) >> FIX_POINT_BITS;
-            // if (abs_y & 0x4 != 0) { result = (result * squared) >> FIX_POINT_BITS; };
-            // squared = (squared * squared) >> FIX_POINT_BITS;
-            // if (abs_y & 0x8 != 0) { result = (result * squared) >> FIX_POINT_BITS; };
-            // squared = (squared * squared) >> FIX_POINT_BITS;
-            // if (abs_y & 0x10 != 0) { result = (result * squared) >> FIX_POINT_BITS; };
-            // squared = (squared * squared) >> FIX_POINT_BITS;
-            // if (abs_y & 0x20 != 0) { result = (result * squared) >> FIX_POINT_BITS; };
-            // squared = (squared * squared) >> FIX_POINT_BITS;
-            // if (abs_y & 0x40 != 0) { result = (result * squared) >> FIX_POINT_BITS; };
-            // squared = (squared * squared) >> FIX_POINT_BITS;
-            // if (abs_y & 0x80 != 0) { result = (result * squared) >> FIX_POINT_BITS; };
-            // squared = (squared * squared) >> FIX_POINT_BITS;
-            // if (abs_y & 0x100 != 0) { result = (result * squared) >> FIX_POINT_BITS; };
-            // squared = (squared * squared) >> FIX_POINT_BITS;
-            // if (abs_y & 0x200 != 0) { result = (result * squared) >> FIX_POINT_BITS; };
-            // squared = (squared * squared) >> FIX_POINT_BITS;
-            // if (abs_y & 0x400 != 0) { result = (result * squared) >> FIX_POINT_BITS; };
-            // squared = (squared * squared) >> FIX_POINT_BITS;
-            // if (abs_y & 0x800 != 0) { result = (result * squared) >> FIX_POINT_BITS; };
-            // squared = (squared * squared) >> FIX_POINT_BITS;
-            // if (abs_y & 0x1000 != 0) { result = (result * squared) >> FIX_POINT_BITS; };
-            // squared = (squared * squared) >> FIX_POINT_BITS;
-            // if (abs_y & 0x2000 != 0) { result = (result * squared) >> FIX_POINT_BITS; };
-            // squared = (squared * squared) >> FIX_POINT_BITS;
-            // if (abs_y & 0x4000 != 0) { result = (result * squared) >> FIX_POINT_BITS; };
-            // squared = (squared * squared) >> FIX_POINT_BITS;
-            // if (abs_y & 0x8000 != 0) { result = (result * squared) >> FIX_POINT_BITS; };
-            // squared = (squared * squared) >> FIX_POINT_BITS;
-            // if (abs_y & 0x10000 != 0) { result = (result * squared) >> FIX_POINT_BITS; };
-            // squared = (squared * squared) >> FIX_POINT_BITS;
-            // if (abs_y & 0x20000 != 0) { result = (result * squared) >> FIX_POINT_BITS; };
-            // squared = (squared * squared) >> FIX_POINT_BITS;
-            // if (abs_y & 0x40000 != 0) { result = (result * squared) >> FIX_POINT_BITS; };
-            // squared = (squared * squared) >> FIX_POINT_BITS;
-            // if (abs_y & 0x80000 != 0) { result = (result * squared) >> FIX_POINT_BITS; };
         };
         // revert if y is too big or if x^y underflowed
         if (result == 0) {
