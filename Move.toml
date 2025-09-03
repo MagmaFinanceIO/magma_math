@@ -5,7 +5,7 @@ edition = "2024.beta" # edition = "legacy" to use legacy (pre-2024) Move
 # authors = ["..."]      # e.g., ["Joe Smith (joesmith@noemail.com)", "John Snow (johnsnow@noemail.com)"]
 
 [dependencies]
-Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "mainnet-v1.41.1" }
+# Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "mainnet-v1.41.1" }
 IntegerMate = { local = "../integer-mate/sui", override = true }
 
 # For remote import, use the `{ git = "...", subdir = "...", rev = "..." }`.
@@ -20,7 +20,7 @@ IntegerMate = { local = "../integer-mate/sui", override = true }
 # Override = { local = "../conflicting/version", override = true }
 
 [addresses]
-magma_math = "0x7675334bcfd81e7a3268ff0b9c8611b20c68b259c46ce840f6237d3018368cb6"
+magma_math = "0xfd4fb46fa9cab466edbc46e95c9f647644018022780041b53c0f39602dfb8d8a"
 
 # Named addresses will be accessible in Move as `@name`. They're also exported:
 # for example, `std = "0x1"` is exported by the Standard Library.
